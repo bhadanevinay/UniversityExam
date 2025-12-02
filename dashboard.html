@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Study Tracker</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-nav">
+            <div class="nav-left">
+                <i class="fa-solid fa-graduation-cap logo-icon"></i>
+                <div class="nav-brand">
+                    <h1>Study Tracker</h1>
+                    <span>Stay consistent. Stay ahead.</span>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="user-info">
+                    <img id="userAvatar" src="" alt="User avatar">
+                    <div class="user-text">
+                        <span id="userName">Loading...</span>
+                        <small id="userEmail"></small>
+                    </div>
+                </div>
+                <button id="logoutBtn" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            
+            <!-- Left Column -->
+            <section class="main-left">
+                <!-- Welcome Card -->
+                <div class="card welcome-card">
+                    <div>
+                        <h2>Welcome back, <span id="welcomeName">Vinay</span> 👋</h2>
+                        <p>Track your syllabus, manage topics, and stay on top of your study goals.</p>
+                    </div>
+                    <div class="welcome-badge">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Progress Mode</span>
+                    </div>
+                </div>
+
+                <!-- Subjects Syllabus Section -->
+                <div class="card subjects-card">
+                    <div class="section-header">
+                        <h3>Your subjects</h3>
+                        <span class="section-subtitle">Tap a subject and unit to track topic-wise progress</span>
+                    </div>
+
+                    <!-- JS will inject all subjects/units/topics here -->
+                    <div id="subjectsContainer" class="subjects-list"></div>
+                </div>
+            </section>
+
+            <!-- Right Column -->
+            <section class="main-right">
+
+                <!-- Remaining Days Card -->
+                <div class="card countdown-card">
+                    <div class="section-header">
+                        <h3>Remaining Days Left for First Paper</h3>
+                        <span class="section-subtitle">
+                            First exam: Data Structures on 15-12-2025
+                        </span>
+                    </div>
+
+                    <div class="countdown-main">
+                        <div class="countdown-days">
+                            <span id="daysLeft" class="days-number">0</span>
+                            <span class="days-label">Days</span>
+                        </div>
+
+                        <div class="countdown-time">
+                            <div class="time-box">
+                                <span id="hoursLeft" class="time-number">00</span>
+                                <span class="time-label">Hours</span>
+                            </div>
+                            <span class="time-separator">:</span>
+                            <div class="time-box">
+                                <span id="minutesLeft" class="time-number">00</span>
+                                <span class="time-label">Minutes</span>
+                            </div>
+                            <span class="time-separator">:</span>
+                            <div class="time-box">
+                                <span id="secondsLeft" class="time-number">00</span>
+                                <span class="time-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timetable Card -->
+                <div class="card timetable-card">
+                    <div class="section-header">
+                        <h3>Exam Timetable</h3>
+                        <span class="section-subtitle">December 2025</span>
+                    </div>
+
+                    <ul class="timetable-list">
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">15-12-2025</span>
+                                <span class="timetable-meta">Data Structures</span>
+                            </div>
+                            <span class="timetable-index">1st</span>
+                        </li>
+
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">17-12-2025</span>
+                                <span class="timetable-meta">Object Oriented Programming &amp; Computer Graphics</span>
+                            </div>
+                            <span class="timetable-index">2nd</span>
+                        </li>
+
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">19-12-2025</span>
+                                <span class="timetable-meta">Operating System</span>
+                            </div>
+                            <span class="timetable-index">3rd</span>
+                        </li>
+
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">22-12-2025</span>
+                                <span class="timetable-meta">Digital Electronics &amp; Logic Design</span>
+                            </div>
+                            <span class="timetable-index">4th</span>
+                        </li>
+
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">24-12-2025</span>
+                                <span class="timetable-meta">Universal Human Values &amp; Professional Ethics</span>
+                            </div>
+                            <span class="timetable-index">5th</span>
+                        </li>
+
+                        <li class="timetable-item">
+                            <div>
+                                <span class="timetable-date">26-12-2025</span>
+                                <span class="timetable-meta">Digital Finance</span>
+                            </div>
+                            <span class="timetable-index">6th</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Load syllabus data (global variable) -->
+    <script src="syllabus-data.js"></script>
+
+    <!-- Dashboard logic (Firebase + UI + progress) -->
+    <script type="module" src="dashboard.js"></script>
+</body>
+</html>

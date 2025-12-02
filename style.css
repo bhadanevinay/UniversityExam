@@ -1,0 +1,237 @@
+/* --- CSS Variables & Reset --- */
+:root {
+    --primary-blue: #008ff7;
+    --brand-gradient: linear-gradient(135deg, #1a87ff 0%, #00c6ff 100%);
+    --bg-gradient-desktop: linear-gradient(135deg, #eef6fd 0%, #cce4f7 100%);
+    --text-dark: #1a1a1a;
+    --text-medium: #666666;
+    --text-light: #999999;
+    --input-bg: #f3f4f6;
+    --border-color: #e5e7eb;
+    --white: #ffffff;
+    --radius-lg: 24px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-gradient-desktop);
+    padding: 20px;
+}
+
+/* --- Main Layout Wrappers --- */
+.main-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Hidden by default on desktop */
+.mobile-header {
+    display: none;
+}
+
+.login-container {
+    display: flex;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    width: 100%;
+    min-height: 600px;
+}
+
+/* --- Animations --- */
+.animate-fade-up {
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =============================
+   Left Side: Form Section Styling
+============================= */
+.form-section {
+    flex: 1;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 500px;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: var(--text-medium);
+    font-size: 15px;
+}
+
+/* Google Full-Width Button */
+.btn-google-full {
+    width: 100%;
+    padding: 16px;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-google-full i {
+    font-size: 20px;
+    color: #DB4437;
+}
+
+.btn-google-full:hover {
+    background-color: var(--input-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* =============================
+   Right Side: Brand Section Styling
+============================= */
+.brand-section {
+    flex: 1;
+    background: var(--brand-gradient);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;       /* Center vertically */
+    align-items: center;           /* Center horizontally */
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Subtle large icon in the background */
+.bg-overlay-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    font-size: 400px;
+    opacity: 0.06;
+    pointer-events: none;
+}
+
+.brand-content {
+    position: relative;
+    z-index: 2;
+    max-width: 320px;
+}
+
+.tagline {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.brand-content h2 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* =============================
+   RESPONSIVE: Mobile View
+============================= */
+@media (max-width: 768px) {
+    body {
+        background: var(--brand-gradient); /* Blue background on mobile */
+        align-items: flex-start; /* Align to top */
+        padding: 0;
+    }
+
+    .main-wrapper {
+        height: 100vh;
+    }
+
+    /* Show Header */
+    .mobile-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 40px 20px 60px; /* Extra padding bottom for overlap */
+        color: var(--white);
+    }
+
+    .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .brand-logo i {
+        font-size: 28px;
+    }
+
+    /* Login Card */
+    .login-container {
+        flex-direction: column;
+        border-radius: 30px 30px 0 0; /* Round only top corners */
+        margin-top: -30px; /* Overlap effect */
+        min-height: auto; /* Let content dictate height */
+        flex: 1; /* Fill remaining vertical space */
+    }
+
+    /* Hide Brand Side */
+    .brand-section {
+        display: none;
+    }
+
+    /* Form Padding */
+    .form-section {
+        padding: 40px 30px;
+        max-width: 100%;
+    }
+    
+    .form-header h1 {
+        font-size: 24px;
+    }
+}

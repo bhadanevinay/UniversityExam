@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Study Tracker</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <header class="mobile-header">
+            <div class="brand-logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>STUDY TRACKER</span>
+            </div>
+        </header>
+
+        <div class="login-container animate-fade-up">
+            
+            <!-- Left: Google Sign-in Section -->
+            <div class="form-section">
+                <div class="form-header">
+                    <h1>Sign in</h1>
+                    <p>Built to track your progress</p>
+                </div>
+
+                <!-- Google Only Login -->
+                <form onsubmit="return false;">
+                    <button type="button" class="btn-google-full" id="googleSignInBtn">
+                        <i class="fa-brands fa-google"></i>
+                        Continue with Google
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right: Brand Section -->
+            <div class="brand-section">
+                <div class="bg-overlay-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+
+                <div class="brand-content">
+                    <p class="tagline">Everything you need to stay on track.</p>
+                    <h2>Manage your Syllabus. All in one place.</h2>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- =========================
+         Firebase + Google Auth
+    ========================== -->
+<script type="module">
+    // Import Firebase SDKs from CDN
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-analytics.js";
+    import { 
+        getAuth, 
+        GoogleAuthProvider, 
+        signInWithPopup 
+    } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyCV63GiJXfloVBHK43zrJbeJbKwi2PwMMg",
+        authDomain: "study-progress-app-22812.firebaseapp.com",
+        projectId: "study-progress-app-22812",
+        storageBucket: "study-progress-app-22812.firebasestorage.app",
+        messagingSenderId: "728222021200",
+        appId: "1:728222021200:web:9d3f12a636330ff3054355",
+        measurementId: "G-YDBDVH6BXT"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // Analytics may not work on localhost, that's fine
+    try {
+        getAnalytics(app);
+    } catch (e) {
+        console.warn("Analytics not available in this environment:", e.message);
+    }
+
+    // Auth + Google provider
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    // Get button
+    const googleBtn = document.getElementById("googleSignInBtn");
+
+    googleBtn.addEventListener("click", async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+
+            // Signed-in user info
+            const user = result.user;
+            console.log("User signed in:", user);
+
+            alert(`Welcome, ${user.displayName}!`);
+            window.location.href = "dashboard.html";
+
+
+        } catch (error) {
+            console.error("Error during Google sign-in:", error);
+
+            // Show specific error code
+            alert(`Google sign-in failed:\n${error.code}\n${error.message}`);
+        }
+    });
+</script>
+
+
+</body>
+</html>
